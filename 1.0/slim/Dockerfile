@@ -3,10 +3,6 @@ FROM debian:jessie
 RUN apt-get update && apt-get install -y --no-install-recommends \
       ca-certificates \
       curl \
-      build-essential \
-      pkg-config \
-      git \
-      python \
   && rm -rf /var/lib/apt/lists/*
 
 # verify gpg and sha256: https://iojs.org/dist/v1.0.0/SHASUMS256.txt.gpg
