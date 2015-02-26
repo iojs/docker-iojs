@@ -1,6 +1,8 @@
 iojs
 =========
 
+[![Join the chat at https://gitter.im/iojs/docker-iojs](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/iojs/docker-iojs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![dockeri.co](http://dockeri.co/image/_/iojs)](https://registry.hub.docker.com/_/iojs/)
 
 [![issues](https://img.shields.io/github/issues/iojs/docker-iojs.svg) ![starts](https://img.shields.io/github/stars/iojs/docker-iojs.svg)](https://github.com/iojs/docker-iojs)
