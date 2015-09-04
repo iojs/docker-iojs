@@ -1,4 +1,4 @@
-FROM buildpack-deps:jessie
+FROM buildpack-deps:jessie-curl
 
 # gpg keys listed at https://github.com/nodejs/io.js
 RUN set -ex \
@@ -14,7 +14,7 @@ RUN set -ex \
   ; done
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV IOJS_VERSION 3.2.0
+ENV IOJS_VERSION 3.3.0
 
 RUN curl -SLO "https://iojs.org/dist/v$IOJS_VERSION/iojs-v$IOJS_VERSION-linux-x64.tar.gz" \
   && curl -SLO "https://iojs.org/dist/v$IOJS_VERSION/SHASUMS256.txt.asc" \
