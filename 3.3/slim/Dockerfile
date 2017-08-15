@@ -14,13 +14,19 @@ RUN set -ex \
   ; done
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV IOJS_VERSION 3.3.0
+ENV IOJS_VERSION 3.3.1
 
-RUN curl -SLO "https://iojs.org/dist/v$IOJS_VERSION/iojs-v$IOJS_VERSION-linux-x64.tar.gz" \
+RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
+  && case "${dpkgArch##*-}" in \
+    amd64) ARCH='x64';; \
+    arm64) ARCH='arm64';; \
+    *) echo "unsupported architecture"; exit 1 ;; \
+  esac \
+  && curl -SLO "https://iojs.org/dist/v$IOJS_VERSION/iojs-v$IOJS_VERSION-linux-$ARCH.tar.gz" \
   && curl -SLO "https://iojs.org/dist/v$IOJS_VERSION/SHASUMS256.txt.asc" \
   && gpg --verify SHASUMS256.txt.asc \
-  && grep " iojs-v$IOJS_VERSION-linux-x64.tar.gz\$" SHASUMS256.txt.asc | sha256sum -c - \
-  && tar -xzf "iojs-v$IOJS_VERSION-linux-x64.tar.gz" -C /usr/local --strip-components=1 \
-  && rm "iojs-v$IOJS_VERSION-linux-x64.tar.gz" SHASUMS256.txt.asc
+  && grep " iojs-v$IOJS_VERSION-linux-$ARCH.tar.gz\$" SHASUMS256.txt.asc | sha256sum -c - \
+  && tar -xzf "iojs-v$IOJS_VERSION-linux-$ARCH.tar.gz" -C /usr/local --strip-components=1 \
+  && rm "iojs-v$IOJS_VERSION-linux-$ARCH.tar.gz" SHASUMS256.txt.asc
 
 CMD [ "iojs" ]
